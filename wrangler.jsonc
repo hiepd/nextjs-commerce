@@ -9,5 +9,32 @@
     "assets": {
         "directory": ".open-next/assets",
         "binding": "ASSETS"
-    }
+    },
+    
+    // Cloudflare Containers Configuration
+    "containers": [
+        {
+            "class_name": "CommerceContainer",
+            "image": "./containers/app/Dockerfile",
+            "max_instances": 5
+        }
+    ],
+    
+    // Durable Object bindings for the container
+    "durable_objects": {
+        "bindings": [
+            {
+                "class_name": "CommerceContainer",
+                "name": "COMMERCE_CONTAINER"
+            }
+        ]
+    },
+    
+    // Migrations for the container's SQLite storage
+    "migrations": [
+        {
+            "new_sqlite_classes": ["CommerceContainer"],
+            "tag": "v1"
+        }
+    ]
 }
