@@ -3,14 +3,11 @@
 // Runtime types generated with workerd@1.20251217.0 2025-12-01 global_fetch_strictly_public,nodejs_compat
 declare namespace Cloudflare {
 	interface Env {
-		NEXTJS_ENV: string;
-		WORKER_SELF_REFERENCE: Fetcher /* nextjs-commerce */;
-		IMAGES: ImagesBinding;
-		ASSETS: Fetcher;
 		COMMERCE_CONTAINER: DurableObjectNamespace;
 	}
 }
 interface CloudflareEnv extends Cloudflare.Env {}
+interface Env extends Cloudflare.Env {}
 type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };

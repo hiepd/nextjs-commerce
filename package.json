@@ -1,25 +1,18 @@
 {
+  "name": "nextjs-commerce",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "prettier": "prettier --write --ignore-unknown .",
-    "prettier:check": "prettier --check --ignore-unknown .",
-    "test": "pnpm prettier:check",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "container:build": "wrangler containers build ./containers/app --context .",
-    "container:push": "wrangler containers push nextjs-commerce",
-    "container:logs": "wrangler containers logs CommerceContainer",
-    "container:deploy": "pnpm run container:build && pnpm run container:push && pnpm run deploy"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "start": "wrangler dev",
+    "cf-typegen": "wrangler types",
+    "build:next": "next build",
+    "dev:next": "next dev --turbopack"
   },
   "dependencies": {
     "@cloudflare/containers": "^0.0.31",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@opennextjs/cloudflare": "^1.14.7",
     "clsx": "^2.1.1",
     "geist": "^1.3.1",
     "next": "15.6.0-canary.60",
