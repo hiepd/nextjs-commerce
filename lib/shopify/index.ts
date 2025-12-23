@@ -95,7 +95,7 @@ export async function shopifyFetch<T>({
       })
     });
 
-    const body = await result.json();
+    const body = await result.json() as { errors?: Array<{ message: string }>; data?: T };
 
     if (body.errors) {
       throw body.errors[0];

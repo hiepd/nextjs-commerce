@@ -2,10 +2,6 @@
  * For more details on how to configure Wrangler, refer to:
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "nextjs-commerce",
@@ -29,12 +25,37 @@
 			// Self-reference service binding, the service name must match the worker name
 			// see https://opennext.js.org/cloudflare/caching
 			"binding": "WORKER_SELF_REFERENCE",
-			"service": "nextjs-test"
+			"service": "nextjs-commerce"
 		}
 	],
 	"observability": {
 		"enabled": true
-	}
+	},
+	// Cloudflare Containers configuration
+	"containers": [
+		{
+			"class_name": "CommerceContainer",
+			"image": "./containers/app/Dockerfile",
+			"max_instances": 10
+		}
+	],
+	"durable_objects": {
+		"bindings": [
+			{
+				"class_name": "CommerceContainer",
+				"name": "COMMERCE_CONTAINER"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"new_sqlite_classes": [
+				"CommerceContainer"
+			],
+			"tag": "v1"
+		}
+	],
+	"upload_source_maps": true
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
